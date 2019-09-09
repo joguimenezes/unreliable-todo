@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { toast } from 'react-toastify';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { Bold, Title } from '../../components/texts/Texts';
 import { createSession } from '../../api/sessionApi';
 import { SESSION } from '../../utils/constants/testId.constant';
 import { SessionType } from '../../types/sessionType';
+import { showErrorNotification, showSuccessNotification } from '../../utils/helpers/displayNotifications';
 import Background from '../../assets/images/session-background-image.svg';
 import Button from '../../components/button/Button';
 import COLORS from '../../utils/constants/color.constant';
@@ -33,7 +33,7 @@ const Session = ({ history }: RouteComponentProps) => {
 
     if (!isErrorRateValid) {
       setIsLoading(false);
-      throw toast('Error rate cannot be less than 0 or greater than 100.', { type: toast.TYPE.ERROR});
+      throw showErrorNotification('Error rate cannot be less than 0 or greater than 100.')
     }
   };
 
@@ -54,7 +54,7 @@ const Session = ({ history }: RouteComponentProps) => {
       handleUpdateSession(newSession);
       history.push('/todos');
     } catch {
-      toast('Oops, something went wrong', { type: toast.TYPE.ERROR });
+      throw showErrorNotification();
     } finally {
         setIsLoading(false);
     }
@@ -91,7 +91,7 @@ const Session = ({ history }: RouteComponentProps) => {
           }
 
           handleUpdateSession(newSession);
-          toast('You have been redirected because already exists an active session.', { type: toast.TYPE.SUCCESS });
+          showSuccessNotification('You have been redirected because already exists an active session.');
           history.push('/todos');
         }
       }

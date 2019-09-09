@@ -5,7 +5,6 @@ const showSuccessNotification = (message: string) => {
 };
 
 const errorMessageDefault = '🤔 Oops, something went wrong!!';
-
 const showErrorNotification = (message: string = errorMessageDefault) => {
   toast(message, { type: toast.TYPE.ERROR });
 };

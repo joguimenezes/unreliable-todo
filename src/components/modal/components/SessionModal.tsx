@@ -6,7 +6,7 @@ import { Bold } from '../../texts/Texts';
 import { MODAL } from '../../../utils/constants/testId.constant';
 import { ModalFooter } from './Wrappers';
 import { SessionType } from '../../../types/sessionType';
-import { toast } from 'react-toastify';
+import { showSuccessNotification, showErrorNotification } from '../../../utils/helpers/displayNotifications';
 import { updateSession, deleteSession } from '../../../api/sessionApi';
 import Button from '../../button/Button';
 import COLORS from '../../../utils/constants/color.constant';
@@ -25,7 +25,6 @@ const SessionModal = ({ history }: RouteComponentProps) => {
   const [errorRate, setErrorRate] = useState(initialErrorRate);
 
   const handleUpdateErroRate = (error: string) => {
-    console.log('error', error)
     if (error) {
       setErrorRate(error);
     }
@@ -41,9 +40,9 @@ const SessionModal = ({ history }: RouteComponentProps) => {
         errorRate,
       };
       localStorage.setItem('@unreliable-todo/sessionId', JSON.stringify(newSession));
-      toast('😁 Session successfully changed', { type: toast.TYPE.SUCCESS });
+      showSuccessNotification('😁 Session successfully changed');
     } catch {
-      throw toast('Oops, something went wrong!!', { type: toast.TYPE.ERROR});
+      throw showErrorNotification();
     }
   };
 
@@ -53,9 +52,9 @@ const SessionModal = ({ history }: RouteComponentProps) => {
       history.push('/');
       localStorage.removeItem('@unreliable-todo/sessionId');
       handleCloseModal(); 
-      toast('😁 Session successfully deleted', { type: toast.TYPE.SUCCESS });
+      showSuccessNotification('😁 Session successfully deleted');
     } catch {
-      throw toast('Oops, something went wrong!!', { type: toast.TYPE.ERROR});
+      throw showErrorNotification();
     }
   };
 

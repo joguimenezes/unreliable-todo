@@ -1,9 +1,9 @@
 import { ThunkAction } from 'redux-thunk';
-import { toast } from 'react-toastify';
 
 import { AppState } from '../../reducers';
 import { getTodos, updateTodo, deleteTodo, createTodo } from '../../../api/todosApi';
 import { TodosActionTypes, UPDATE_TODOS, Todo, UpdatedTodo } from '../../reducers/todos/types';
+import { showErrorNotification, showSuccessNotification } from '../../../utils/helpers/displayNotifications';
 
 const updateTodos = (todos: Todo[], isLoadingTodos: boolean = false, error: boolean = false): TodosActionTypes => ({
   type: UPDATE_TODOS,
@@ -49,9 +49,9 @@ const updateTodoAsync = ({
       };
 
       dispatch(updateTodos(newTodos));
-      toast('😁 Todo successfully changed', { type: toast.TYPE.SUCCESS });
+      showSuccessNotification('😁 Todo successfully changed');
     } catch {
-      toast('Oops, something went wrong!!', { type: toast.TYPE.ERROR });
+      throw showErrorNotification();
     }
   };
 };
@@ -61,9 +61,9 @@ const deleteTodoAsync = (todoId: string, sessionId: string): ThunkAction<Promise
     try {
       const { todos: newTodos } = await deleteTodo(todoId, sessionId);
       dispatch(updateTodos(newTodos));
-      toast('😁 Todo successfully deleted', { type: toast.TYPE.SUCCESS });
+      showSuccessNotification('😁 Todo successfully deleted');
     } catch {
-      toast('🤔 Oops, something went wrong!!', { type: toast.TYPE.ERROR });
+      throw showErrorNotification();
     }
   }
 };
@@ -80,9 +80,9 @@ const createAsyncTodo = (todo: Todo, sessionId: string): ThunkAction<Promise<voi
       };
 
       dispatch(updateTodos(newTodos));
-      toast('😁 Todo successfully created', { type: toast.TYPE.SUCCESS });
+      showSuccessNotification('😁 Todo successfully created');
     } catch {
-      toast('🤔 Oops, something went wrong!!', { type: toast.TYPE.ERROR });
+      throw showErrorNotification();
     }
   }
 };
