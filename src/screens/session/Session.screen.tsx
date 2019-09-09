@@ -45,7 +45,7 @@ const Session = ({ history }: RouteComponentProps) => {
       handleUpdateSession(session);
       history.push('/todos');
     } catch {
-      toast('Oops, something went wrong', { type: toast.TYPE.SUCCESS });
+      toast('Oops, something went wrong', { type: toast.TYPE.ERROR });
     } finally {
         setIsLoading(false);
     }
