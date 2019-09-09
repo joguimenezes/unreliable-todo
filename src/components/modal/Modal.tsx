@@ -63,7 +63,12 @@ const Modal = () => {
   const handleCreateTodo = () => {
     if (session) {
       const { sessionId } = JSON.parse(session);
-      dispatch(createAsyncTodo(todo, sessionId));
+      const newTodo = {
+        ...todo,
+        isCompleted: false,
+      };
+
+      dispatch(createAsyncTodo(newTodo, sessionId));
       handleCloseModal();
     };
   };
@@ -158,9 +163,13 @@ const ModalHeader = styled.header`
   align-items: center;
   background: transparent linear-gradient(61deg, #1E2A39 0%, #364455 100%) 0% 0% no-repeat padding-box;
   display: flex;
-  height: 270px;
+  height: 170px;
   justify-content: center;
   position: relative;
+
+  @media ${MEDIA_QUERIES.DESKTOP_SCREEN} {
+    height: 270px;
+  }
 `;
 
 const Wrapper = styled.div`

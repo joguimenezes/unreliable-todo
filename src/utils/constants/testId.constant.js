@@ -5,7 +5,8 @@ const SESSION = {
 };
 
 const TODO_LIST = {
-  TRASH_WRAPPER: 'trash-wrapper'
+  TRASH_WRAPPER: 'trash-wrapper',
+  COPY_WRAPPER: 'copy-wrapper',
 };
 
 const MODAL = {

@@ -90,7 +90,7 @@ const TodoList = ({ history }: RouteComponentProps) => {
 
           {!error && isLoadingTodos
             ? <Loader backgroundColor={COLORS.WHITE} />
-            : filteredTodos.map((todo: Todo) => <Card id={todo.id} key={todo.id} onClick={() => handleOnClickTodo(todo)} testId={`card-wrapper${todo.id}`} title={todo.text} />)}
+            : filteredTodos.map((todo: Todo) => <Card todo={todo} key={todo.id} onClick={() => handleOnClickTodo(todo)} testId={`card-wrapper${todo.id}`} />)}
         </CardsWrapper>
       </BoardWrapper>
     </Wrapper>

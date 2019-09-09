@@ -61,11 +61,10 @@ const Textarea = styled.textarea`
   border: 1px solid ${COLORS["PRIMARY-20%"]};
   color: ${COLORS.PRIMARY};
   height: 100px;
-  margin: 5px 0 20px;
+  margin: 5px 0;
   padding: 25px;
   resize: none;
   width: calc(100% - 50px);
-  
 
   @media ${MEDIA_QUERIES.DESKTOP_SCREEN} {
     height: 180px;
@@ -82,7 +81,6 @@ const TextWrapper = styled.div`
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-bottom: 25px;
   width: calc(100% - 25px);
 
   @media ${MEDIA_QUERIES.DESKTOP_SCREEN} {

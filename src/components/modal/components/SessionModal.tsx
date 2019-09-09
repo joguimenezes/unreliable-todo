@@ -24,6 +24,13 @@ const SessionModal = ({ history }: RouteComponentProps) => {
   const initialErrorRate = parsedSession ? parsedSession.errorRate : null;
   const [errorRate, setErrorRate] = useState(initialErrorRate);
 
+  const handleUpdateErroRate = (error: string) => {
+    console.log('error', error)
+    if (error) {
+      setErrorRate(error);
+    }
+  };
+
   const handleUpdateSession = async () => {
     if (!session) return;
 
@@ -58,7 +65,7 @@ const SessionModal = ({ history }: RouteComponentProps) => {
           <TextWrapper>
             <Bold>Error rate:</Bold>
             <StyledRoundedInput
-              onChange={e => setErrorRate(e.target.value)}
+              onChange={e => handleUpdateErroRate(e.target.value)}
               testId={MODAL.URGENCY_INPUT}
               value={errorRate}
             />

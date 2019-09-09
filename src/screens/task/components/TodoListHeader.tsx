@@ -30,10 +30,19 @@ const TodoListHeader = ({ handleFilterTodos }: Props) => {
 };
 
 const StyledButton = styled(Button)`
+  bottom: 10px;
+  left: 0;
+  margin: 0 auto;
   position: absolute;
-  right: 100px;
-  top: 80px;
-  width: 280px;
+  right: 0;
+
+  @media ${MEDIA_QUERIES.DESKTOP_SCREEN} {
+    margin: 0;
+    right: 100px;
+    top: 65px;
+    left: unset;
+    width: 280px;
+  }
 `;
 
 const SearchInput = styled.input`

@@ -19,6 +19,15 @@ const Session = ({ history }: RouteComponentProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorRate, setErrorRate] = useState(0);
 
+  const handleUpdateErroRate = (errorRate: string) => {
+    const formattedErrorErate = parseInt(errorRate, 10);
+    const isValid = Number(formattedErrorErate);
+
+    if (isValid) {
+      setErrorRate(formattedErrorErate);
+    }
+  };
+
   const validateErrorRate = () => {
     const isErrorRateValid = errorRate >= 0 && errorRate <= 100;
 
@@ -36,13 +45,13 @@ const Session = ({ history }: RouteComponentProps) => {
 
     try {
       const { sessionId } = await createSession(errorRate);
-      const session: SessionType = {
+      const newSession: SessionType = {
         createdAt: new Date(),
         errorRate,
         sessionId,
       };
 
-      handleUpdateSession(session);
+      handleUpdateSession(newSession);
       history.push('/todos');
     } catch {
       toast('Oops, something went wrong', { type: toast.TYPE.ERROR });
@@ -102,7 +111,7 @@ const Session = ({ history }: RouteComponentProps) => {
           
           <RoundedInput
             label="Error rate"
-            onChange={e => setErrorRate(parseInt(e.target.value))}
+            onChange={e => handleUpdateErroRate(e.target.value)}
             testId={SESSION.ERROR_RATE_INPUT}
             value={errorRate}
           />
@@ -116,7 +125,7 @@ const Session = ({ history }: RouteComponentProps) => {
       </RightWrapper>
     </Wrapper>
   )
-}
+};
 
 const StyledBold = styled(Bold)`
   color: ${COLORS.WHITE};
