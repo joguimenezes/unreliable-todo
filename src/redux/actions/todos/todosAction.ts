@@ -1,9 +1,9 @@
 import { ThunkAction } from 'redux-thunk';
 import { toast } from 'react-toastify';
 
+import { AppState } from '../../reducers';
 import { getTodos, updateTodo, deleteTodo, createTodo } from '../../../api/todosApi';
 import { TodosActionTypes, UPDATE_TODOS, Todo, UpdatedTodo } from '../../reducers/todos/types';
-import { AppState } from '../../reducers';
 
 const updateTodos = (todos: Todo[], isLoadingTodos: boolean = false, error: boolean = false): TodosActionTypes => ({
   type: UPDATE_TODOS,
@@ -76,7 +76,7 @@ const createAsyncTodo = (todo: Todo, sessionId: string): ThunkAction<Promise<voi
 
       const newTodos = {
         ...currentTodos,
-        newTodo,
+        [newTodo.id]: newTodo,
       };
 
       dispatch(updateTodos(newTodos));

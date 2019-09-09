@@ -2,21 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
-import { deleteTodoAsync } from '../../redux/actions/todos/todosAction';
+import { deleteTodoAsync, createAsyncTodo } from '../../redux/actions/todos/todosAction';
+import { showErrorNotification } from '../../utils/helpers/displayNotifications';
+import { Todo } from '../../redux/reducers/todos/types';
 import { TODO_LIST } from '../../utils/constants/testId.constant';
 import COLORS from '../../utils/constants/color.constant';
+import CopyImage from '../../assets/images/copy.svg';
+import getLocalStorageSession from '../../utils/helpers/localStorage';
 import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
 import TrashImage from '../../assets/images/delete.svg';
-import getLocalStorageSession from '../../utils/helpers/localStorage';
 
 type CardProps = {
-  id: string,
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void,
   testId: string,
-  title: string,
+  todo: Todo,
 }
 
-const Card = ({ id, onClick, testId, title }: CardProps) => {
+const Card = ({ todo, onClick, testId }: CardProps) => {
   const dispatch = useDispatch();
   
   const handleDeleteTodo = (e: React.MouseEvent<HTMLElement>) => {
@@ -25,14 +27,38 @@ const Card = ({ id, onClick, testId, title }: CardProps) => {
     
     if (session) {
       const { sessionId } = JSON.parse(session);
-      dispatch(deleteTodoAsync(id, sessionId))
+      dispatch(deleteTodoAsync(todo.id, sessionId))
+    }
+  };
+
+  const handleDuplicateTodo = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+
+    const session = getLocalStorageSession();
+
+    if (!session) {
+      throw showErrorNotification();
+    }
+
+    try {
+      const { sessionId } = JSON.parse(session);
+      dispatch(createAsyncTodo(todo, sessionId));
+    } catch {
+      throw showErrorNotification();
     }
   };
 
   return (
     <Wrapper data-testid={testId} onClick={onClick}>
-      <Title>{title}</Title>
+      <Title>{todo.text}</Title>
       <PanelBoard>
+        <DuplicateIcon
+          alt="Trash Icon"
+          data-testid={TODO_LIST.COPY_WRAPPER} 
+          onClick={handleDuplicateTodo}
+          src={CopyImage}
+        />
+
         <TrashIcon
           alt="Trash Icon"
           data-testid={TODO_LIST.TRASH_WRAPPER} 
@@ -43,6 +69,13 @@ const Card = ({ id, onClick, testId, title }: CardProps) => {
     </Wrapper>
   );
 }
+
+const DuplicateIcon = styled.img`
+  cursor: pointer;
+  height: 20px;
+  margin: 5px 5px 0 0;
+  width: 16px;
+`;
 
 const TrashIcon = styled.img`
   cursor: pointer;
