@@ -14,6 +14,8 @@ import useModal from '../../hooks/useModal';
 
 import { UpdatedTodo } from '../../redux/reducers/todos/types';
 import { AppState } from '../../redux/reducers';
+import SessionModal from './components/SessionModal';
+import getLocalStorageSession from '../../utils/helpers/localStorage';
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const Modal = () => {
   const [isLoadingUpdateTodo, setIsLoadingUpdateTodo] = useState(false);
 
   const { handleCloseModal } = useModal();
+  const session = getLocalStorageSession();
 
   const handleUpdateSelectedTodo = (field: string, value: boolean | string | number) => {
     setTodo({
@@ -40,7 +43,6 @@ const Modal = () => {
   const handleSaveTodo = async () => {
     setIsLoadingUpdateTodo(true);
 
-    const session = localStorage.getItem('@unreliable-todo/sessionId');
     if (session && todo) {
       const { sessionId } = JSON.parse(session);
       const updateTodo: UpdatedTodo = {
@@ -59,7 +61,6 @@ const Modal = () => {
   };
 
   const handleCreateTodo = () => {
-    const session = localStorage.getItem('@unreliable-todo/sessionId');
     if (session) {
       const { sessionId } = JSON.parse(session);
       dispatch(createAsyncTodo(todo, sessionId));
@@ -79,6 +80,10 @@ const Modal = () => {
             isLoading={isLoadingUpdateTodo}
             todo={todo}
           />
+        )
+      case 'SESSION': 
+        return (
+          <SessionModal />
         )
       default:
         return selectedTodo && (

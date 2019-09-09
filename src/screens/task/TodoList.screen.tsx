@@ -7,13 +7,16 @@ import { AppState } from '../../redux/reducers';
 import { fetchTodos, setSelectedTodo } from '../../redux/actions/todos/todosAction';
 import { openModal } from '../../redux/actions/modal';
 import { SessionType } from '../../types/sessionType';
+import { Title, Bold } from '../../components/texts/Texts';
 import { Todo } from '../../redux/reducers/todos/types';
 import Button from '../../components/button/Button';
 import Card from '../../components/card/Card';
 import COLORS from '../../utils/constants/color.constant';
 import FilterImage from '../../assets/images/filter.svg';
+import getLocalStorageSession from '../../utils/helpers/localStorage';
 import Loader from '../../components/loader/Loader';
 import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
+import TodoListHeader from './components/TodoListHeader';
 import transformToLowerCase from '../../utils/helpers/transformToLowerCase';
 import useModal from '../../hooks/useModal';
 
@@ -23,11 +26,10 @@ const TodoList = ({ history }: RouteComponentProps) => {
   const [filteredTodos, setFilteredTodos] = useState<Todo[]>([]);
 
   const { handleOpenModal } = useModal();
+  const session = getLocalStorageSession();
 
   useEffect(() => {
     const redirectToSessionScreen = () => {
-      const session = localStorage.getItem('@unreliable-todo/sessionId');
-
       if (!session) {
         history.push('/');
         return;
@@ -38,8 +40,6 @@ const TodoList = ({ history }: RouteComponentProps) => {
   }, []);
 
   const handleGetTodos = () => {
-    const session = localStorage.getItem('@unreliable-todo/sessionId');
-
     if (session) {
       const formattedSession: SessionType = JSON.parse(session);
       dispatch(fetchTodos(formattedSession.sessionId));
@@ -59,7 +59,7 @@ const TodoList = ({ history }: RouteComponentProps) => {
     dispatch(setSelectedTodo(todo));
   };
 
-  const handleFilterTodos = ({ currentTarget }: React.FormEvent<HTMLInputElement>) => {
+  const handleFilterTodos = ({ currentTarget }: React.ChangeEvent<HTMLInputElement>) => {
     const filter = Object.values(todos)
       .filter((todo: Todo) => transformToLowerCase(todo.text).includes(transformToLowerCase(currentTarget.value)));
 
@@ -68,11 +68,11 @@ const TodoList = ({ history }: RouteComponentProps) => {
 
   return (
     <Wrapper>
-      <SearchInput onChange={handleFilterTodos} placeholder="Search"/>
+      <TodoListHeader handleFilterTodos={handleFilterTodos} />
 
       <BoardWrapper>
         <Header>
-          <Title>To do list</Title>
+          <StyledTitle>To do list</StyledTitle>
           <ActionsWrapper>
             <AddCard onClick={() => handleOpenModal('ADD')}>+</AddCard>
             <Filter alt="Filter Icon" src={FilterImage}/>
@@ -80,32 +80,27 @@ const TodoList = ({ history }: RouteComponentProps) => {
         </Header>
 
         <CardsWrapper>
-          {
-            error && (
-              <Button
-                isLoading={isLoadingTodos}
-                onClick={handleGetTodos}
-                text="Retry get todos"
-              />
-            )
-          }
+          {error && (
+            <Button
+              isLoading={isLoadingTodos}
+              onClick={handleGetTodos}
+              text="Retry get todos"
+            />
+          )}
 
-          {
-            isLoadingTodos
+          {!error && isLoadingTodos
             ? <Loader backgroundColor={COLORS.WHITE} />
-            : filteredTodos.map((todo: Todo) => <Card id={todo.id} key={todo.id} onClick={() => handleOnClickTodo(todo)} testId={`card-wrapper${todo.id}`} title={todo.text} />)
-          }
+            : filteredTodos.map((todo: Todo) => <Card id={todo.id} key={todo.id} onClick={() => handleOnClickTodo(todo)} testId={`card-wrapper${todo.id}`} title={todo.text} />)}
         </CardsWrapper>
       </BoardWrapper>
     </Wrapper>
   )
 };
 
-const AddCard = styled.span`
+const AddCard = styled(Bold)`
   color: ${COLORS.SECONDARY};
   cursor: pointer;
   font-size: 55px;
-  font-weight: bold;
   margin-right: 15px;
 
   &:hover {
@@ -149,24 +144,6 @@ const Header = styled.header`
   }
 `;
 
-const SearchInput = styled.input`
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid ${COLORS["WHITE-20%"]};
-  color: ${COLORS.WHITE};
-  font-size: 24px;
-  height: 25px;
-  margin: 50px 25px;
-  padding-bottom: 10px;
-  text-align: center;
-  width: calc(100% - 50px);
-
-  @media ${MEDIA_QUERIES.DESKTOP_SCREEN} {
-    margin: 80px 0 0 0;
-    width: 550px;
-  }
-`;
-
 const BoardWrapper = styled.main`
   align-content: flex-start;
   align-self: flex-start;
@@ -181,12 +158,9 @@ const BoardWrapper = styled.main`
   }
 `;
 
-const Title = styled.h1`
-  color: ${COLORS.WHITE};
+const StyledTitle = styled(Title)`
   font-size: 36px;
   font-weight: bold;
-  margin: 0;
-  padding: 0;
   width: 100%;
 `;
 

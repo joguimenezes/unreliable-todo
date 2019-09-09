@@ -4,6 +4,7 @@ const COLORS = {
   SECONDARY: '#A1F751',
   WHITE: '#FFFFFF',
   'WHITE-20%': 'rgba(255, 255, 255, .2)',
+  SALMON: '#FA8072',
 }
 
 export default COLORS

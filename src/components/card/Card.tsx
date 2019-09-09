@@ -7,6 +7,7 @@ import { TODO_LIST } from '../../utils/constants/testId.constant';
 import COLORS from '../../utils/constants/color.constant';
 import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
 import TrashImage from '../../assets/images/delete.svg';
+import getLocalStorageSession from '../../utils/helpers/localStorage';
 
 type CardProps = {
   id: string,
@@ -20,8 +21,8 @@ const Card = ({ id, onClick, testId, title }: CardProps) => {
   
   const handleDeleteTodo = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
+    const session = getLocalStorageSession();
     
-    const session = localStorage.getItem('@unreliable-todo/sessionId');
     if (session) {
       const { sessionId } = JSON.parse(session);
       dispatch(deleteTodoAsync(id, sessionId))

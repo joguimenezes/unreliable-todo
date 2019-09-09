@@ -11,6 +11,7 @@ import Background from '../../assets/images/session-background-image.svg';
 import Button from '../../components/button/Button';
 import COLORS from '../../utils/constants/color.constant';
 import getDiffBetweenDatesInMinutes from '../../utils/helpers/getDiffBetweenDatesInMinutes';
+import getLocalStorageSession from '../../utils/helpers/localStorage';
 import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
 import RoundedInput from '../../components/inputs/RoundedInput';
 
@@ -23,9 +24,7 @@ const Session = ({ history }: RouteComponentProps) => {
 
     if (!isErrorRateValid) {
       setIsLoading(false);
-      toast('Error rate cannot be less than 0 or greater than 100.', { type: toast.TYPE.ERROR});
-      return;
-      throw '';
+      throw toast('Error rate cannot be less than 0 or greater than 100.', { type: toast.TYPE.ERROR});
     }
   };
 
@@ -39,6 +38,7 @@ const Session = ({ history }: RouteComponentProps) => {
       const { sessionId } = await createSession(errorRate);
       const session: SessionType = {
         createdAt: new Date(),
+        errorRate,
         sessionId,
       };
 
@@ -69,7 +69,7 @@ const Session = ({ history }: RouteComponentProps) => {
 
   useEffect(() => {
     const redirectToTasksScreen = () => {
-      const session = localStorage.getItem('@unreliable-todo/sessionId');
+      const session = getLocalStorageSession();
 
       if (session) {
         const isSessionValid = validateSession(session);

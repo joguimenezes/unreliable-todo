@@ -6,20 +6,30 @@ import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
 import Loader from '../loader/Loader';
 
 interface ButtonProps {
+  className?: string,
   isLoading: boolean,
   onClick?: (event: React.MouseEvent) => void,
   testId?: string,
   text: string,
 }
 
-const Button = ({ isLoading, onClick, testId, text }: ButtonProps) => {
+const Button = ({ 
+  className,
+  isLoading,
+  onClick,
+  testId,
+  text
+}: ButtonProps) => {
   return (
-    <Btn data-testid={testId} onClick={onClick} type="button">
-      {
-        isLoading
+    <Btn
+      className={className}
+      data-testid={testId}
+      onClick={onClick}
+      type="button"
+    >
+      {isLoading
         ? <Loader backgroundColor={COLORS.PRIMARY} />
-        : text 
-      }
+        : text }
     </Btn>
   )
 }

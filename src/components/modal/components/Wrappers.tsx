@@ -11,7 +11,8 @@ const ModalFooter = styled.footer`
 `;
 
 const DatesWrapper = styled.div`
-  margin-bottom: 10px;
+  bottom: 10px;
+  position: absolute;
   text-align: center;
   width: 100%;
 `;

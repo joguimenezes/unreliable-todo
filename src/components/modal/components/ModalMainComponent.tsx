@@ -46,6 +46,7 @@ const ModalMainComponent = ({ children, onChange, todo }: Props) => (
 const StyledRoundedInput = styled(RoundedInput)`
   border-color: ${COLORS["PRIMARY-20%"]};
   color: ${COLORS.PRIMARY};
+  width: 100%;
 `;
 
 const Checkbox = styled.input``;
@@ -97,6 +98,7 @@ const Main = styled.main`
   flex: 1;
   justify-content: flex-start;
   margin-top: 20px;
+  position: relative;
   width: 100%;
 
   @media ${MEDIA_QUERIES.DESKTOP_SCREEN} {
