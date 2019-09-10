@@ -1,4 +1,4 @@
-import { ModalState, ModalActionTypes } from "./types";
+import { ModalState, ModalActionTypes } from "../../../types/modalTypes";
 
 const CLOSE_MODAL = 'CLOSE_MODAL';
 const OPEN_MODAL = 'OPEN_MODAL';

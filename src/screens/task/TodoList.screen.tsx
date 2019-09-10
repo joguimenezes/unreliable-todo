@@ -8,7 +8,7 @@ import { fetchTodos, setSelectedTodo } from '../../redux/actions/todos/todosActi
 import { openModal } from '../../redux/actions/modal';
 import { SessionType } from '../../types/sessionType';
 import { Title, Bold } from '../../components/texts/Texts';
-import { Todo } from '../../redux/reducers/todos/types';
+import { Todo } from '../../types/todoTypes';
 import Button from '../../components/button/Button';
 import Card from '../../components/card/Card';
 import COLORS from '../../utils/constants/color.constant';

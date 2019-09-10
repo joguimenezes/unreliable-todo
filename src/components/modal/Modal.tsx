@@ -11,7 +11,7 @@ import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
 import UpdateTodoModal from './components/UpdateTodoModal';
 import useModal from '../../hooks/useModal';
 
-import { UpdatedTodo } from '../../redux/reducers/todos/types';
+import { UpdatedTodo } from '../../types/todoTypes';
 import { AppState } from '../../redux/reducers';
 import SessionModal from './components/SessionModal';
 import getLocalStorageSession from '../../utils/helpers/localStorage';

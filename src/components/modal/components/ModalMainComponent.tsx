@@ -1,7 +1,7 @@
 import React, { ReactChild } from 'react';
 import styled from 'styled-components';
 
-import { Todo } from '../../../redux/reducers/todos/types';
+import { Todo } from '../../../types/todoTypes';
 import COLORS from '../../../utils/constants/color.constant';
 import MEDIA_QUERIES from '../../../utils/constants/mediaQuery.constant';
 import RoundedInput from '../../inputs/RoundedInput';

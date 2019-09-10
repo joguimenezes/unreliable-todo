@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { deleteTodoAsync, createAsyncTodo } from '../../redux/actions/todos/todosAction';
 import { showErrorNotification } from '../../utils/helpers/displayNotifications';
-import { Todo } from '../../redux/reducers/todos/types';
+import { Todo } from '../../types/todoTypes';
 import { TODO_LIST } from '../../utils/constants/testId.constant';
 import COLORS from '../../utils/constants/color.constant';
 import CopyImage from '../../assets/images/copy.svg';

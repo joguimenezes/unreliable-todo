@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Todo, UpdatedTodo } from '../redux/reducers/todos/types';
+import { Todo, UpdatedTodo } from '../types/todoTypes';
 
 const instance = axios.create({
   baseURL: 'http://localhost:9000/api',

@@ -3,7 +3,7 @@ import {
   TodosActionTypes,
   TodosState,
   UPDATE_TODOS,
-} from './types';
+} from '../../../types/todoTypes';
 
 const initialState: TodosState = {
     error: false,

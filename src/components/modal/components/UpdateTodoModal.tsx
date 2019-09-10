@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import { Bold, Label } from '../../texts/Texts';
 import { DatesWrapper, ModalFooter } from './Wrappers';
-import { Todo } from '../../../redux/reducers/todos/types';
+import { Todo } from '../../../types/todoTypes';
 import Button from '../../button/Button';
 import getFormattedDate from '../../../utils/helpers/formatDate';
 import ModalMainComponent from './ModalMainComponent';

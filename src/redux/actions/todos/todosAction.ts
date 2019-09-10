@@ -2,7 +2,7 @@ import { ThunkAction } from 'redux-thunk';
 
 import { AppState } from '../../reducers';
 import { getTodos, updateTodo, deleteTodo, createTodo } from '../../../api/todosApi';
-import { TodosActionTypes, UPDATE_TODOS, Todo, UpdatedTodo } from '../../reducers/todos/types';
+import { TodosActionTypes, UPDATE_TODOS, Todo, UpdatedTodo } from '../../../types/todoTypes';
 import { showErrorNotification, showSuccessNotification } from '../../../utils/helpers/displayNotifications';
 
 const updateTodos = (todos: Todo[], isLoadingTodos: boolean = false, error: boolean = false): TodosActionTypes => ({

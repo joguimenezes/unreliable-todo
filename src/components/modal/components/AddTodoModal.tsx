@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { ModalFooter } from './Wrappers';
-import { Todo } from '../../../redux/reducers/todos/types';
+import { Todo } from '../../../types/todoTypes';
 import Button from '../../button/Button';
 import ModalMainComponent from './ModalMainComponent';
 
