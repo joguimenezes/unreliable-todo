@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RoundedInput tests should render correctly when has onChange and value 1`] = `
+<div
+  class="sc-bwzfXH cyfaGt"
+>
+  <label
+    class="sc-bdVaJa iIXUxH"
+  />
+  <input
+    class="sc-htpNat gtqAat"
+    value="100"
+  />
+</div>
+`;
+
+exports[`RoundedInput tests should render correctly when has placeholder, onChange and value 1`] = `
+<div
+  class="sc-bwzfXH cyfaGt"
+>
+  <label
+    class="sc-bdVaJa iIXUxH"
+  />
+  <input
+    class="sc-htpNat gtqAat"
+    placeholder="Placeholder"
+    value="Name"
+  />
+</div>
+`;
