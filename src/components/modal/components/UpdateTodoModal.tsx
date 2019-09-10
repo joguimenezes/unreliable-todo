@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { Bold, Label } from '../../texts/Texts';
+import { Bold, Label } from '../../text/Texts';
 import { DatesWrapper, ModalFooter } from './Wrappers';
 import { Todo } from '../../../types/todoTypes';
 import Button from '../../button/Button';

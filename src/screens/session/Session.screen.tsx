@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import { Bold, Title } from '../../components/texts/Texts';
+import { Bold, Title } from '../../components/text/Texts';
 import { createSession } from '../../api/sessionApi';
 import { SESSION } from '../../utils/constants/testId.constant';
 import { SessionType } from '../../types/sessionType';
@@ -13,7 +13,7 @@ import COLORS from '../../utils/constants/color.constant';
 import getDiffBetweenDatesInMinutes from '../../utils/helpers/getDiffBetweenDatesInMinutes';
 import getLocalStorageSession from '../../utils/helpers/localStorage';
 import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
-import RoundedInput from '../../components/inputs/RoundedInput';
+import RoundedInput from '../../components/input/RoundedInput';
 
 const Session = ({ history }: RouteComponentProps) => {
   const [isLoading, setIsLoading] = useState(false);

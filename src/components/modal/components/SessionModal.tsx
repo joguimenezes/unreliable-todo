@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-import { Bold } from '../../texts/Texts';
+import { Bold } from '../../text/Texts';
 import { MODAL } from '../../../utils/constants/testId.constant';
 import { ModalFooter } from './Wrappers';
 import { SessionType } from '../../../types/sessionType';
@@ -12,7 +12,7 @@ import Button from '../../button/Button';
 import COLORS from '../../../utils/constants/color.constant';
 import getLocalStorageSession from '../../../utils/helpers/localStorage';
 import MEDIA_QUERIES from '../../../utils/constants/mediaQuery.constant';
-import RoundedInput from '../../inputs/RoundedInput';
+import RoundedInput from '../../input/RoundedInput';
 import useModal from '../../../hooks/useModal';
 
 

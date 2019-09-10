@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Todo } from '../../../types/todoTypes';
 import COLORS from '../../../utils/constants/color.constant';
 import MEDIA_QUERIES from '../../../utils/constants/mediaQuery.constant';
-import RoundedInput from '../../inputs/RoundedInput';
+import RoundedInput from '../../input/RoundedInput';
 import { MODAL } from '../../../utils/constants/testId.constant';
 
 type Props = {

@@ -7,7 +7,7 @@ import { AppState } from '../../redux/reducers';
 import { fetchTodos, setSelectedTodo } from '../../redux/actions/todos/todosAction';
 import { openModal } from '../../redux/actions/modal';
 import { SessionType } from '../../types/sessionType';
-import { Title, Bold } from '../../components/texts/Texts';
+import { Title, Bold } from '../../components/text/Texts';
 import { Todo } from '../../types/todoTypes';
 import Button from '../../components/button/Button';
 import Card from '../../components/card/Card';
