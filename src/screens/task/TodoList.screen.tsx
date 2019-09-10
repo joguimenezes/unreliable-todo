@@ -12,7 +12,6 @@ import { Todo } from '../../redux/reducers/todos/types';
 import Button from '../../components/button/Button';
 import Card from '../../components/card/Card';
 import COLORS from '../../utils/constants/color.constant';
-import FilterImage from '../../assets/images/filter.svg';
 import getLocalStorageSession from '../../utils/helpers/localStorage';
 import Loader from '../../components/loader/Loader';
 import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
@@ -75,7 +74,6 @@ const TodoList = ({ history }: RouteComponentProps) => {
           <StyledTitle>To do list</StyledTitle>
           <ActionsWrapper>
             <AddCard onClick={() => handleOpenModal('ADD')}>+</AddCard>
-            <Filter alt="Filter Icon" src={FilterImage}/>
           </ActionsWrapper>
         </Header>
 
@@ -118,16 +116,6 @@ const CardsWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 100%;
-`;
-
-const Filter = styled.img`
-  cursor: pointer;
-  height: 33px;
-  width: 32px;
-
-  &:hover {
-    opacity: 0.8;
-  }
 `;
 
 const Header = styled.header`
