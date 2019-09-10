@@ -1,13 +1,13 @@
-import { Reducer } from 'redux';
+import { ModalState, ModalActionTypes } from "./types";
 
 const CLOSE_MODAL = 'CLOSE_MODAL';
 const OPEN_MODAL = 'OPEN_MODAL';
 
-const initialState = {
+const initialState: ModalState = {
   isModalOpen: false,
 }
 
-const modalReducer: Reducer = (state = initialState, action) => {
+const modalReducer = (state = initialState, action:ModalActionTypes): ModalState => {
   switch(action.type) {
     case OPEN_MODAL:
       return {

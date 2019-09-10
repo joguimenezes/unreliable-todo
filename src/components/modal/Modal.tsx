@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ModalStateType } from '../../types/modalType';
 import { updateTodoAsync, createAsyncTodo } from '../../redux/actions/todos/todosAction';
 
 import AddTodoModal from './components/AddTodoModal';
@@ -21,7 +20,7 @@ const Modal = () => {
   const dispatch = useDispatch();
 
   const { selectedTodo } = useSelector((state: AppState) => state.todoList);
-  const { isModalOpen, type } = useSelector((state: ModalStateType) => state.modal);
+  const { isModalOpen, type } = useSelector((state: AppState) => state.modal);
 
   const [todo, setTodo] = useState();
   const [isLoadingUpdateTodo, setIsLoadingUpdateTodo] = useState(false);
@@ -75,7 +74,7 @@ const Modal = () => {
 
   if (!isModalOpen) return null;
 
-  const renderModalByType = (type: string) => {
+  const renderModalByType = (type?: string) => {
     switch(type) {
       case 'ADD':
         return (

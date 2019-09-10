@@ -26,7 +26,6 @@ export interface UpdatedTodo {
   todoId: string,
 };
 
-//// actions
 export const SET_SELECTED_TODO = 'SET_SELECTED_TODO';
 export const UPDATE_TODOS = 'UPDATE_TODOS';
 
