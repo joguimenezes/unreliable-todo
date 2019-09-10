@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getHeaders from '../utils/constants/headers.constant';
 
 const instance = axios.create({
   baseURL: 'http://localhost:9000/api',
@@ -14,19 +15,13 @@ const updateSession = (errorRate: number, sessionId: string) => instance
   .patch('/session', {
     errorRate
   }, {
-    headers: {
-      "Content-Type":"application/json",
-      sessionId,
-    },
+    headers: getHeaders(sessionId),
   })
   .then(response => response.data);
 
 const deleteSession = (sessionId: string) => instance
   .delete('/session', {
-    headers: {
-      "Content-Type":"application/json",
-      sessionId,
-    }
+    headers: getHeaders(sessionId),
   })
   .then(response => response.data);
 

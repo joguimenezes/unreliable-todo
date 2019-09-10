@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Todo, UpdatedTodo } from '../types/todoTypes';
+import getHeaders from '../utils/constants/headers.constant';
 
 const instance = axios.create({
   baseURL: 'http://localhost:9000/api',
@@ -7,27 +8,19 @@ const instance = axios.create({
 
 const getTodos = (sessionId: string) => instance
   .get('/todos', {
-    headers: {
-      sessionId,
-    }
+    headers: getHeaders(sessionId),
   })
   .then(response => response.data);
 
 const createTodo = (todo: Todo, sessionId: string) => instance
   .post('/todos/', todo, {
-    headers: {
-      "Content-Type": "application/json",
-      sessionId,
-    }
+    headers: getHeaders(sessionId),
   })
   .then(response => response.data);
 
 const deleteTodo = (todoId: string, sessionId: string) => instance
   .delete(`/todos/${todoId}`, {
-    headers: {
-      "Content-Type": "application/json",
-      sessionId,
-    }
+    headers: getHeaders(sessionId),
   })
   .then(response => response.data)
 
@@ -44,10 +37,7 @@ const updateTodo = ({
       urgency: data.urgency,
     }
   }, {
-    headers: {
-      "Content-Type":"application/json",
-      sessionId,
-    },
+    headers: getHeaders(sessionId),
   })
   .then(response => response.data);
 
