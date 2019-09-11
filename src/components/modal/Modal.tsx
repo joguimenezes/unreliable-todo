@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { AppState } from '../../redux/reducers';
+import { showErrorNotification } from '../../utils/helpers/displayNotifications';
+import { UpdatedTodo } from '../../types/todoTypes';
 import { updateTodoAsync, createAsyncTodo } from '../../redux/actions/todos/todosAction';
-
 import AddTodoModal from './components/AddTodoModal';
 import COLORS from '../../utils/constants/color.constant';
+import getLocalStorageSession from '../../utils/helpers/localStorage';
 import HeaderImage from '../../assets/images/modal-background-image.svg';
 import MEDIA_QUERIES from '../../utils/constants/mediaQuery.constant';
+import SessionModal from './components/SessionModal';
 import UpdateTodoModal from './components/UpdateTodoModal';
 import useModal from '../../hooks/useModal';
-
-import { UpdatedTodo } from '../../types/todoTypes';
-import { AppState } from '../../redux/reducers';
-import SessionModal from './components/SessionModal';
-import getLocalStorageSession from '../../utils/helpers/localStorage';
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -28,6 +27,18 @@ const Modal = () => {
   const { handleCloseModal } = useModal();
   const session = getLocalStorageSession();
 
+  const validateUpdatedTodo = () => {
+    const isUrgencyValid = todo.urgency > 0 && todo.urgency <= 5;
+    
+    if (!isUrgencyValid) {
+      throw showErrorNotification('🤔 Urgency cannot be less or equal than 0 or greater than 5.');
+    }
+
+    if (!todo.text) {
+      throw showErrorNotification('🤔 To do text cannot be empty.');
+    }
+  };
+
   const handleUpdateSelectedTodo = (field: string, value: boolean | string | number) => {
     setTodo({
       ...todo,
@@ -40,6 +51,8 @@ const Modal = () => {
   }, [selectedTodo]);
 
   const handleSaveTodo = async () => {
+    validateUpdatedTodo();
+
     setIsLoadingUpdateTodo(true);
 
     if (session && todo) {
@@ -68,7 +81,7 @@ const Modal = () => {
         urgency: parseInt(todo.urgency, 10),
       };
 
-      dispatch(createAsyncTodo(newTodo, sessionId));
+      dispatch(createAsyncTodo(newTodo, sessionId, 'created'));
       handleCloseModal();
     };
   };

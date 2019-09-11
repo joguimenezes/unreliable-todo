@@ -68,7 +68,7 @@ const deleteTodoAsync = (todoId: string, sessionId: string): ThunkAction<Promise
   }
 };
 
-const createAsyncTodo = (todo: Todo, sessionId: string): ThunkAction<Promise<void>, AppState, {}, TodosActionTypes> => {
+const createAsyncTodo = (todo: Todo, sessionId: string, message: string): ThunkAction<Promise<void>, AppState, {}, TodosActionTypes> => {
   return async (dispatch, getState) => {
     try {
       const { todo: newTodo } = await createTodo(todo, sessionId);
@@ -80,7 +80,7 @@ const createAsyncTodo = (todo: Todo, sessionId: string): ThunkAction<Promise<voi
       };
 
       dispatch(updateTodos(newTodos));
-      showSuccessNotification('😁 Todo successfully created');
+      showSuccessNotification(`😁 Todo successfully ${message}`);
     } catch {
       throw showErrorNotification();
     }

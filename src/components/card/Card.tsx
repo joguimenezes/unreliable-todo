@@ -42,7 +42,7 @@ const Card = ({ todo, onClick, testId }: CardProps) => {
 
     try {
       const { sessionId } = JSON.parse(session);
-      dispatch(createAsyncTodo(todo, sessionId));
+      dispatch(createAsyncTodo(todo, sessionId, 'duplicated'));
     } catch {
       throw showErrorNotification();
     }
