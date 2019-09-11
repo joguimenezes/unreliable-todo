@@ -25,11 +25,10 @@ const Button = ({
       className={className}
       data-testid={testId}
       onClick={onClick}
-      type="button"
     >
       {isLoading
         ? <Loader backgroundColor={COLORS.PRIMARY} />
-        : text }
+        : text}
     </Btn>
   )
 }

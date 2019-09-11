@@ -21,7 +21,7 @@ const SessionModal = ({ history }: RouteComponentProps) => {
   const session = getLocalStorageSession();
   const parsedSession = session ? JSON.parse(session) : null;;
 
-  const initialErrorRate = parsedSession ? parsedSession.errorRate : null;
+  const initialErrorRate = parsedSession ? parsedSession.errorRate : 0;
   const [errorRate, setErrorRate] = useState(initialErrorRate);
 
   const handleUpdateErroRate = (error: string) => {

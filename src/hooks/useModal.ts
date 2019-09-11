@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { AppState } from '../redux/reducers';
 import { closeModal, openModal } from '../redux/actions/modal';
 import { setSelectedTodo } from '../redux/actions/todos/todosAction';
 
 const useModal = () => {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector(state => state.modal.isModalOpen);
+  const isModalOpen = useSelector((state: AppState) => state.modal.isModalOpen);
 
-  const handleOpenModal = (type) => {
+  const handleOpenModal = (type: string) => {
     dispatch(openModal(type));
   };
 
