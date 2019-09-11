@@ -23,7 +23,7 @@ const ModalMainComponent = ({ children, onChange, todo }: Props) => (
     <TextWrapper>
       <Bold>Urgency:</Bold>
       <StyledRoundedInput
-        onChange={e => onChange('urgency', parseInt(e.currentTarget.value, 10))}
+        onChange={e => onChange('urgency', e.currentTarget.value)}
         testId={MODAL.URGENCY_INPUT}
         value={todo && todo.urgency}
       />

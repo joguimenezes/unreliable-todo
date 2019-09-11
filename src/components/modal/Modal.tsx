@@ -65,6 +65,7 @@ const Modal = () => {
       const newTodo = {
         ...todo,
         isCompleted: false,
+        urgency: parseInt(todo.urgency, 10),
       };
 
       dispatch(createAsyncTodo(newTodo, sessionId));
